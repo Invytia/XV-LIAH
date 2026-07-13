@@ -31,29 +31,11 @@
             width: 100%;
             height: 100%;
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(160deg, #fff5f8 0%, #fffaf0 100%);
+            background: linear-gradient(165deg, #ffe3ee 0%, #ffeef5 45%, #fff2e9 100%);
             color: var(--text-dark);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
-
-        #fixed-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: url('assets/hero.jpg') no-repeat center center;
-            background-size: cover;
-            z-index: 0;
-            opacity: 0;
-            transition: opacity 1.5s ease-out 0.6s;
-        }
-        #fixed-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(255,240,245,0.6) 0%, rgba(255,251,234,0.8) 100%);
-        }
-        body.content-active #fixed-bg { opacity: 1; }
 
         #envelope-screen {
             position: fixed;
@@ -219,6 +201,57 @@
             padding: 30px 16px;
             position: relative;
             z-index: 1;
+        }
+
+        .hero-photo-frame {
+            position: relative;
+            width: calc(100% + 32px);
+            margin: -30px -16px 30px;
+            border-radius: 20px 20px 32px 32px;
+            overflow: hidden;
+            box-shadow: 0 18px 40px rgba(214, 106, 141, 0.28);
+        }
+        .hero-photo {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            filter: saturate(1.05) contrast(103%);
+        }
+        .hero-overlay {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            padding: 50px 20px 26px;
+            background: linear-gradient(to top, rgba(70, 20, 40, 0.72) 0%, rgba(70, 20, 40, 0.28) 55%, transparent 100%);
+            text-align: center;
+        }
+        .hero-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            letter-spacing: 5px;
+            color: var(--yellow-3);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .hero-name {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 62px;
+            line-height: 1.1;
+            color: #fffaf2;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.35), 0 0 24px rgba(240, 185, 62, 0.35);
+        }
+        .hero-name .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: letterIn 0.7s ease forwards;
+        }
+        @media (max-width: 400px) {
+            .hero-photo { height: 340px; }
+            .hero-name { font-size: 46px; }
+            .hero-overlay { padding: 34px 14px 20px; }
         }
 
         .icon-badge {
@@ -666,7 +699,6 @@
 </head>
 <body>
 
-    <div id="fixed-bg"></div>
     <div id="fireflies-container"></div>
 
     <audio id="bg-music" src="assets/song.mp3" loop></audio>
@@ -694,8 +726,13 @@
         <div class="invitation-frame">
             <div class="frame-inner-border">
 
-            <div class="section-tag reveal">Mis XV Años</div>
-            <h1 class="main-title" id="main-title-anim"></h1>
+            <div class="hero-photo-frame reveal-scale">
+                <img src="assets/hero.jpg" alt="Liah Raquel" class="hero-photo">
+                <div class="hero-overlay">
+                    <div class="hero-tag">Mis XV Años</div>
+                    <h1 class="hero-name" id="main-title-anim"></h1>
+                </div>
+            </div>
 
             <p class="phrase reveal">
                 Los momentos más importantes se viven mejor al lado de quienes más queremos. Acompáñanos a celebrar los XV años de nuestra querida hija. ¡Tu presencia será el mejor regalo!
